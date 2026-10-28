@@ -7,8 +7,46 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- LOCK PAGE  -->
-    <section class="lock-screen"></section>
-    <!-- LOCK PAGE  -->
+    <!-- INPUT LOCK AND UNLOCK  -->
+    <input type="checkbox" id="lock-toggle" class="state-toggle" />
+    <input type="checkbox" id="lock-toggle" class="state-toggle" />
+
+    <!-- WALLPAPPERS -->
+    <div class="os-bg-image bg-lock"></div>
+    <div class="os-bg-image bg-desktop"></div>
+    <!-- WALLPAPPERS -->
+
+    <label for="lock-toggle" class="click-surface"></label>
+
+    <div class="lock-screen-content">
+      <div class="time">12:03</div>
+      <div class="date">Thursday, October 29</div>
+    </div>
+
+    <div class="sign-in-screen">
+      <div class="user-image"></div>
+      <div class="username">User Name</div>
+
+      <div class="pasword-box">
+        <input
+          type="password"
+          class="password-input"
+          placeholder="Enter Password"
+          value="•••••••"
+        />
+
+        <label for="unlock-toggle" class="submit-label-btn"></label>
+      </div>
+    </div>
+
+    <div class="desktop-screen">
+      <div class="taskbar">
+        <div class="taskbar-icon icon-start"></div>
+        <div class="taskbar-icon"></div>
+        <div class="taskbar-icon"></div>
+        <div class="taskbar-icon"></div>
+      </div>
+    </div>
+    <!-- INPUT LOCK AND UNLOCK  -->
   </body>
 </html>

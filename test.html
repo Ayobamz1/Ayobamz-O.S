@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windows 11 Full OS Flow (Pure HTML/CSS)</title>
+    <link rel="stylesheet" href="test.css" />
+  </head>
+  <body>
+    <!-- Hidden CSS State Engines -->
+    <input type="checkbox" id="lock-toggle" class="state-toggle" />
+    <input type="checkbox" id="unlock-toggle" class="state-toggle" />
+
+    <!-- Interactive Wallpapers -->
+    <div class="os-background bg-lock"></div>
+    <div class="os-background bg-desktop"></div>
+
+    <!-- Layer 1 Click Trigger -->
+    <label for="lock-toggle" class="click-surface"></label>
+
+    <!-- Content Layer 1: Lock screen -->
+    <div class="lock-screen-content">
+      <div class="win11-time">11:11</div>
+      <div class="win11-date">Wednesday, October 28</div>
+    </div>
+
+    <!-- Content Layer 2: Sign-in Interface -->
+    <div class="sign-in-screen">
+      <div class="user-avatar"></div>
+      <div class="username">User Name</div>
+
+      <div class="password-box">
+        <input
+          type="password"
+          class="password-input"
+          placeholder="Enter Password"
+          value="•••••••"
+        />
+        <!-- Clicking this label updates the #unlock-toggle checkbox state -->
+        <label for="unlock-toggle" class="submit-label-btn">&#10142;</label>
+      </div>
+    </div>
+
+    <!-- Content Layer 3: Completed Desktop View -->
+    <div class="desktop-screen">
+      <!-- Desktop Icons can go here -->
+
+      <!-- Windows 11 Taskbar -->
+      <div class="win11-taskbar">
+        <div class="taskbar-icon icon-start"></div>
+        <div class="taskbar-icon"></div>
+        <div class="taskbar-icon"></div>
+        <div class="taskbar-icon"></div>
+      </div>
+    </div>
+  </body>
+</html>
