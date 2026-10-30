@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Windows 11 Full OS Flow (Pure HTML/CSS)</title>
+    <title>Ayobamz O.S</title>
     <link rel="stylesheet" href="test.css" />
+    <link
+      rel="shortcut icon"
+      href="images/icons8-a-48.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <!-- Hidden CSS State Engines -->
@@ -26,18 +31,29 @@
 
     <!-- Content Layer 2: Sign-in Interface -->
     <div class="sign-in-screen">
-      <img src="images/download (8).jpg" alt="" class="user-avatar" />
-      <div class="username">User Name</div>
+      <img src="images/The user-image.jpg" alt="" class="user-avatar" />
+      <div class="username">Welcome Ayobami</div>
 
       <div class="password-box">
         <input
           type="password"
           class="password-input"
-          placeholder="Enter Password"
-          value="•••••••"
+          placeholder="Password"
+          onfocus="
+            this.value = '';
+            this.placeholder = 'Password';
+          "
+          onblur="
+            if (this.value === '') {
+              this.placeholder = 'Password';
+            }
+          "
+          required
         />
         <!-- Clicking this label updates the #unlock-toggle checkbox state -->
-        <label for="unlock-toggle" class="submit-label-btn"></label>
+        <label for="unlock-toggle" class="submit-label-btn one"></label>
+        <label for="unlock-toggle" class="submit-label-btn two"></label>
+        <label for="unlock-toggle" class="submit-label-btn three"></label>
       </div>
     </div>
 
