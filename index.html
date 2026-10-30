@@ -5,48 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ayobamz O.S</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="images/icons8-a-48.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
-    <!-- INPUT LOCK AND UNLOCK  -->
+    <!-- Hidden CSS State Engines -->
     <input type="checkbox" id="lock-toggle" class="state-toggle" />
-    <input type="checkbox" id="lock-toggle" class="state-toggle" />
+    <input type="checkbox" id="unlock-toggle" class="state-toggle" />
 
-    <!-- WALLPAPPERS -->
-    <div class="os-bg-image bg-lock"></div>
-    <div class="os-bg-image bg-desktop"></div>
-    <!-- WALLPAPPERS -->
+    <!-- Interactive Wallpapers -->
+    <div class="os-background bg-lock"></div>
+    <div class="os-background bg-desktop"></div>
 
+    <!-- Layer 1 Click Trigger -->
     <label for="lock-toggle" class="click-surface"></label>
 
+    <!-- Content Layer 1: Lock screen -->
     <div class="lock-screen-content">
-      <div class="time">12:03</div>
-      <div class="date">Thursday, October 29</div>
+      <div class="win11-time">11:11</div>
+      <div class="win11-date">Wednesday, October 28</div>
     </div>
 
+    <!-- Content Layer 2: Sign-in Interface -->
     <div class="sign-in-screen">
-      <div class="user-image"></div>
-      <div class="username">User Name</div>
+      <img src="images/The user-image.jpg" alt="" class="user-avatar" />
+      <div class="username">Welcome Ayobami</div>
 
-      <div class="pasword-box">
+      <div class="password-box">
         <input
           type="password"
           class="password-input"
-          placeholder="Enter Password"
-          value="•••••••"
+          placeholder="Password"
+          onfocus="
+            this.value = '';
+            this.placeholder = 'Password';
+          "
+          onblur="
+            if (this.value === '') {
+              this.placeholder = 'Password';
+            }
+          "
+          required
         />
-
-        <label for="unlock-toggle" class="submit-label-btn"></label>
+        <!-- Clicking this label updates the #unlock-toggle checkbox state -->
+        <label for="unlock-toggle" class="submit-label-btn one"></label>
+        <label for="unlock-toggle" class="submit-label-btn two"></label>
+        <label for="unlock-toggle" class="submit-label-btn three"></label>
       </div>
     </div>
 
+    <!-- Content Layer 3: Completed Desktop View -->
     <div class="desktop-screen">
-      <div class="taskbar">
+      <!-- Desktop Icons can go here -->
+
+      <!-- Windows 11 Taskbar -->
+      <div class="win11-taskbar">
         <div class="taskbar-icon icon-start"></div>
         <div class="taskbar-icon"></div>
         <div class="taskbar-icon"></div>
         <div class="taskbar-icon"></div>
       </div>
     </div>
-    <!-- INPUT LOCK AND UNLOCK  -->
   </body>
 </html>

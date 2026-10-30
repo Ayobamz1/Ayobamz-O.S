@@ -4,46 +4,61 @@
   box-sizing: border-box;
 }
 
-html,
 body {
-  scroll-behavior: smooth;
+  height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  color: #ffffff;
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+  background: #0b0f19;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.lock-screen {
-  min-height: 100vh;
-  background-image: url(images/windows\ 12\ concept\ wallpaper.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
+/* --- THE PURE CSS STATE CONTROLLERS --- */
 .state-toggle {
-  display: none;
+  display: none; /* Hides both control checkboxes */
 }
 
-.os-bg-image {
+/* --- BACKGROUND MANAGEMENT --- */
+.os-background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  transition: filter 1s ease-in-out;
+  transition: filter 0.8s ease-in-out;
 }
-
+/* Lock Screen Background (Blurred Bloom effect) */
 .bg-lock {
-  background-image: url(images/windows\ 12\ concept\ wallpaper.jpg);
+  /* background: radial-gradient(circle at center, #2d3856 0%, #0b0f19 100%); */
+  background-image: url(images/Windows\ Lock\ Screen.jpg);
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
 }
-
+/* Desktop Background (Clearer, lighter bloom) */
 .bg-desktop {
-  background-image: url(images/Windows\ 11\ Lock\ Screen\ Wallpaper\ 4K.jpg);
-  transition: opacity 2s ease-in-out;
+  /* background: radial-gradient(circle at center, #3a4874 0%, #05070b 100%); */
+  background-image: url(images/Windows\ 12\ .jpg);
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
 
+/* --- LAYER 1: LOCK SCREEN CLOCK --- */
 .click-surface {
   position: absolute;
   top: 0;
@@ -64,26 +79,25 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 14vh;
+  padding-top: 200px;
   z-index: 4;
   transition:
-    transform 0.5s ease-in-out,
-    opacity 0.4s ease-in-out;
+    transform 0.6s ease-in-out,
+    opacity 0.5s ease-in-out;
 }
 
-.time {
-  font-size: 6rem;
+.win11-time {
+  font-size: 10rem;
   font-weight: 600;
   line-height: 1;
-  filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.45));
 }
-.date {
-  font-size: 1.35rem;
+.win11-date {
+  font-size: 1.4rem;
   font-weight: 400;
-  margin-top: 10px;
-  opacity: 0.9;
+  margin-top: 12px;
 }
 
+/* --- LAYER 2: WINDOWS 11 SIGN-IN PANEL --- */
 .sign-in-screen {
   position: absolute;
   top: 0;
@@ -98,7 +112,171 @@ body {
   opacity: 0;
   transform: scale(1.05);
   transition:
-    transform 0.5s cubic-bezier(0.1, 0.9, 0.2, 1),
-    opacity 0.4s ease-in-out;
+    transform 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.3),
+    opacity 0.8s ease-in-out;
   pointer-events: none;
+}
+
+.user-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 6px 40px 6px 12px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 3px #25a2f5;
+  border-radius: 4px;
+  color: rgba(243, 243, 243, 0.432) 70b;
+  outline: none;
+}
+
+.password-input::placeholder {
+  font-family: monospace;
+  font-size: 15px;
+  color: #cecece;
+}
+
+.password-input[placeholder="Password"] {
+  color: #fff;
+  font-size: 20px;
+}
+
+/* Arrow button styled as an HTML Label link */
+.submit-label-btn {
+  cursor: pointer;
+  position: relative;
+  right: 30px;
+}
+
+.one {
+  border: 1px solid #919191;
+  width: 20px;
+}
+
+.two {
+  border: 1px solid #919191;
+  width: 10px;
+  transform: rotate(40deg);
+  position: relative;
+  right: 40px;
+  bottom: 4px;
+}
+
+.three {
+  border: 1px solid #919191;
+  width: 10px;
+  transform: rotate(-40deg);
+  position: relative;
+  right: 49px;
+  top: 4px;
+}
+
+.submit-label-btn:hover {
+  color: #60cdff;
+}
+
+/* --- LAYER 3: WINDOWS 11 DESKTOP --- */
+.desktop-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    transform 0.6s cubic-bezier(0.1, 0.9, 0.2, 1),
+    opacity 0.5s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Pushes taskbar to bottom */
+}
+
+/* Windows 11 Centered Taskbar */
+.win11-taskbar {
+  width: 100%;
+  height: 48px;
+  background: rgba(32, 32, 32, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Taskbar App Icon placeholders */
+.taskbar-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.taskbar-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.icon-start {
+  background: #0078d4;
+} /* Blue start button */
+
+/* --- THE CSS TRANSITION FLOW LOGIC --- */
+
+/* FLOW STEP 1: Screen Clicked -> Show Login */
+#lock-toggle:checked ~ .lock-screen-content {
+  transform: translateY(-80px);
+  opacity: 0;
+  pointer-events: none;
+}
+#lock-toggle:checked ~ .click-surface {
+  display: none; /* Removes first layer listener */
+}
+#lock-toggle:checked ~ .sign-in-screen {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+#lock-toggle:checked ~ .bg-lock {
+  filter: blur(20px) brightness(0.8); /* Blurs wallpaper when login shows */
+}
+
+/* FLOW STEP 2: Arrow Clicked -> Unlocks Desktop */
+#unlock-toggle:checked ~ .sign-in-screen {
+  transform: translateY(100vh); /* Login screen drops down away */
+  opacity: 0;
+  pointer-events: none;
+}
+#unlock-toggle:checked ~ .bg-lock {
+  opacity: 0;
+}
+#unlock-toggle:checked ~ .bg-desktop {
+  opacity: 1;
+}
+#unlock-toggle:checked ~ .desktop-screen {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto; /* Activates desktop app interaction */
 }
