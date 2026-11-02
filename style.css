@@ -57,7 +57,6 @@ body {
   transition: opacity 0.8s ease-in-out;
 }
 
-/* --- LAYER 1: LOCK SCREEN CLOCK --- */
 .click-surface {
   position: absolute;
   top: 0;
@@ -96,7 +95,6 @@ body {
   margin-top: 12px;
 }
 
-/* --- LAYER 2: WINDOWS 11 SIGN-IN PANEL --- */
 .sign-in-screen {
   position: absolute;
   top: 0;
@@ -159,17 +157,6 @@ body {
   font-size: 20px;
 }
 
-/* CSS-only replacement for the old onfocus/onblur JavaScript:
-   when you click inside the box, the "Password" hint fades away.
-   When you click out and the box is empty, it fades back in. */
-.password-input::placeholder {
-  transition: color 0.2s;
-}
-.password-input:focus::placeholder {
-  color: transparent;
-}
-
-/* Arrow button styled as an HTML Label link */
 .submit-label-btn {
   cursor: pointer;
   position: relative;
@@ -203,7 +190,6 @@ body {
   color: #60cdff;
 }
 
-/* --- LAYER 3: WINDOWS 11 DESKTOP --- */
 .desktop-screen {
   position: absolute;
   top: 0;
@@ -222,12 +208,6 @@ body {
   justify-content: flex-end; /* Pushes taskbar to bottom */
 }
 
-/* =========================================================
-   STEP 3: WINDOWS 11 TASKBAR
-   ========================================================= */
-
-/* The bar itself. z-index keeps it ABOVE any window.
-   justify-content: space-between pushes the 3 zones apart. */
 .win11-taskbar {
   position: relative;
   z-index: 20;
@@ -242,8 +222,6 @@ body {
   padding: 0 8px;
 }
 
-/* Left and right zones both take equal space (flex: 1),
-   which keeps the middle zone perfectly centered. */
 .tb-left,
 .tb-right {
   flex: 1;
