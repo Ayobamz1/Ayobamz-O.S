@@ -306,7 +306,6 @@ body {
   color: #c4c4c4;
 }
 
-/* --- Pinned apps in the middle --- */
 .tb-app {
   position: relative;
   width: 42px;
@@ -335,7 +334,6 @@ body {
   transform: scale(0.85);
 }
 
-/* The small bar under an icon. Hidden (width 0) until its window is open. */
 .tb-app::after {
   content: "";
   position: absolute;
