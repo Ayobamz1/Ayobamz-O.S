@@ -1,0 +1,4165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayobamz O.S</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="images/icons8-a-48.ico"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <!-- Hidden CSS State Engine
+         ONE group of radio buttons = ONE place that remembers what the
+         computer is doing right now. Only one can be ON at a time:
+           sys-lock    -> lock screen (the starting state)
+           sys-signin  -> password screen
+           sys-desktop -> desktop
+           sys-start   -> desktop with the Start menu open
+           sys-off     -> shut down (black screen)  -->
+    <input
+      type="radio"
+      name="system"
+      id="sys-lock"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="system" id="sys-signin" class="state-toggle" />
+    <input type="radio" name="system" id="sys-desktop" class="state-toggle" />
+    <input type="radio" name="system" id="sys-start" class="state-toggle" />
+    <input type="radio" name="system" id="sys-off" class="state-toggle" />
+
+    <!-- WINDOW STATES --->
+    <!-- About Me -->
+    <input
+      type="radio"
+      name="about"
+      id="about-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="about" id="about-open" class="state-toggle" />
+    <input type="radio" name="about" id="about-min" class="state-toggle" />
+    <input type="radio" name="about" id="about-max" class="state-toggle" />
+    <!-- Projects -->
+    <input
+      type="radio"
+      name="projects"
+      id="projects-closed"
+      class="state-toggle"
+      checked
+    />
+    <input
+      type="radio"
+      name="projects"
+      id="projects-open"
+      class="state-toggle"
+    />
+    <input
+      type="radio"
+      name="projects"
+      id="projects-min"
+      class="state-toggle"
+    />
+    <input
+      type="radio"
+      name="projects"
+      id="projects-max"
+      class="state-toggle"
+    />
+    <!-- Skills -->
+    <input
+      type="radio"
+      name="skills"
+      id="skills-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="skills" id="skills-open" class="state-toggle" />
+    <input type="radio" name="skills" id="skills-min" class="state-toggle" />
+    <input type="radio" name="skills" id="skills-max" class="state-toggle" />
+    <!-- Resume -->
+    <input
+      type="radio"
+      name="resume"
+      id="resume-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="resume" id="resume-open" class="state-toggle" />
+    <input type="radio" name="resume" id="resume-min" class="state-toggle" />
+    <input type="radio" name="resume" id="resume-max" class="state-toggle" />
+    <!-- Contact -->
+    <input
+      type="radio"
+      name="contact"
+      id="contact-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="contact" id="contact-open" class="state-toggle" />
+    <input type="radio" name="contact" id="contact-min" class="state-toggle" />
+    <input type="radio" name="contact" id="contact-max" class="state-toggle" />
+    <!-- Notepad -->
+    <input
+      type="radio"
+      name="notepad"
+      id="notepad-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="notepad" id="notepad-open" class="state-toggle" />
+    <input type="radio" name="notepad" id="notepad-min" class="state-toggle" />
+    <input type="radio" name="notepad" id="notepad-max" class="state-toggle" />
+    <!-- Settings -->
+    <input
+      type="radio"
+      name="settings"
+      id="settings-closed"
+      class="state-toggle"
+      checked
+    />
+    <input
+      type="radio"
+      name="settings"
+      id="settings-open"
+      class="state-toggle"
+    />
+    <input
+      type="radio"
+      name="settings"
+      id="settings-min"
+      class="state-toggle"
+    />
+    <input
+      type="radio"
+      name="settings"
+      id="settings-max"
+      class="state-toggle"
+    />
+    <!-- Recycle Bin -->
+    <input
+      type="radio"
+      name="bin"
+      id="bin-closed"
+      class="state-toggle"
+      checked
+    />
+    <input type="radio" name="bin" id="bin-open" class="state-toggle" />
+    <input type="radio" name="bin" id="bin-min" class="state-toggle" />
+    <input type="radio" name="bin" id="bin-max" class="state-toggle" />
+
+    <!-- Interactive Wallpapers -->
+    <div class="os-background bg-lock"></div>
+    <div class="os-background bg-desktop"></div>
+
+    <!-- Layer 1 Click Trigger -->
+    <label for="sys-signin" class="click-surface"></label>
+
+    <!-- Content Layer 1: Lock screen -->
+    <div class="lock-screen-content">
+      <div class="win11-time">11:11</div>
+      <div class="win11-date">Wednesday, October 28</div>
+    </div>
+
+    <!-- Content Layer 2: Sign-in Interface -->
+    <div class="sign-in-screen">
+      <img src="images/The user-image.jpg" alt="" class="user-avatar" />
+      <div class="username">Welcome Ayobami</div>
+
+      <div class="password-box">
+        <input
+          type="password"
+          class="password-input"
+          placeholder="Password"
+          required
+        />
+        <!-- Clicking the arrow selects the "sys-desktop" radio -->
+        <label for="sys-desktop" class="submit-label-btn one"></label>
+        <label for="sys-desktop" class="submit-label-btn two"></label>
+        <label for="sys-desktop" class="submit-label-btn three"></label>
+      </div>
+    </div>
+
+    <!-- Content Layer 3: Completed Desktop View -->
+    <div class="desktop-screen">
+      <!-- ========== DESKTOP ICONS (left side) ==========
+           Every icon is ONE box (.desktop-icon) holding:
+             1) an SVG picture   2) a text label
+           To add a new icon later, copy one whole box and change
+           the colour class, the SVG shape and the name.
+      -->
+      <div class="desktop-icons">
+        <!-- About Me -->
+        <label for="about-open" class="desktop-icon icon-blue">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+          </svg>
+          <span>About Me</span>
+        </label>
+
+        <!-- Projects -->
+        <label for="projects-open" class="desktop-icon icon-yellow">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+            />
+          </svg>
+          <span>Projects</span>
+        </label>
+
+        <!-- Skills -->
+        <label for="skills-open" class="desktop-icon icon-purple">
+          <svg viewBox="0 0 24 24">
+            <polygon
+              points="12 3 14.8 9 21.5 9.8 16.5 14.4 17.9 21 12 17.7 6.1 21 7.5 14.4 2.5 9.8 9.2 9"
+            />
+          </svg>
+          <span>Skills</span>
+        </label>
+
+        <!-- Resume -->
+        <label for="resume-open" class="desktop-icon icon-green">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 3h8l5 5v13H6z" />
+            <path d="M14 3v5h5" />
+            <path d="M9 13h7M9 17h5" />
+          </svg>
+          <span>Resume</span>
+        </label>
+
+        <!-- Contact -->
+        <label for="contact-open" class="desktop-icon icon-orange">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+          </svg>
+          <span>Contact</span>
+        </label>
+
+        <!-- Notepad -->
+        <label for="notepad-open" class="desktop-icon icon-pink">
+          <svg viewBox="0 0 24 24">
+            <rect x="5" y="3" width="14" height="18" rx="2" />
+            <path d="M9 8h6M9 12h6M9 16h4" />
+          </svg>
+          <span>Notepad</span>
+        </label>
+
+        <!-- Settings -->
+        <label for="settings-open" class="desktop-icon icon-grey">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2.5" />
+            <path
+              d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"
+            />
+          </svg>
+          <span>Settings</span>
+        </label>
+
+        <!-- Recycle Bin -->
+        <label for="bin-open" class="desktop-icon icon-teal">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
+          </svg>
+          <span>Recycle Bin</span>
+        </label>
+      </div>
+
+      <!-- ========== WINDOWS (all start closed) ========== -->
+
+      <!-- ===================== HOW TO MAKE A NEW WINDOW =====================
+           Say your new app is called "maps".
+           1. At the top of this file (WINDOW STATES), copy the 4 radio
+              buttons of "about" and change "about" to "maps" everywhere.
+           2. Copy one whole <div class="window win-about"> ... </div> block below.
+              Change "about" to "maps" in the class and in every for="" (lines
+              marked "change name"). Then change the title and the content.
+           3. In style.css, copy the "About Me window" block in the
+              WINDOW STATES section and change "about" to "maps".
+           4. Add the window's position and size in style.css
+              (copy the .win-about line and rename it .win-maps).
+           5. Make a desktop icon: <label for="maps-open" ...>
+           ==================================================================== -->
+
+      <!-- ---------- ABOUT ME WINDOW ---------- -->
+      <div class="window win-about">
+        <div class="title-bar">
+          <span class="title-text">About Me</span>
+          <div class="title-buttons">
+            <label
+              for="about-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <!-- change name -->
+            <label
+              for="about-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <!-- change name -->
+            <label
+              for="about-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <!-- change name -->
+            <label
+              for="about-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+            <!-- change name -->
+          </div>
+        </div>
+
+        <!-- ABOUT ME: change the name, role and text below to your own -->
+        <div class="window-body about">
+          <img
+            src="images/The user-image.jpg"
+            alt="Ayobami"
+            class="about-avatar"
+          />
+          <h2 class="about-name">Ayobami</h2>
+          <p class="about-role">Front-End Developer (Student)</p>
+          <p class="about-bio">
+            I just finished Level 1 at SQI College of ICT. I love turning ideas
+            into websites with HTML and CSS. This whole operating system is
+            built with no JavaScript at all.
+          </p>
+          <div class="about-tags">
+            <span>SQI College of ICT</span>
+            <span>Level 1 completed</span>
+          </div>
+          <div class="about-status">
+            <span class="status-dot"></span>
+            <span class="status-label">Currently:</span>
+            <b>Building my O.S</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- PROJECTS WINDOW ---------- -->
+      <div class="window win-projects">
+        <div class="title-bar">
+          <span class="title-text">Projects</span>
+          <div class="title-buttons">
+            <label
+              for="projects-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="projects-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="projects-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="projects-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <div class="explorer">
+          <!-- ===================== YOUR 30 PROJECT FOLDERS =====================
+               Each project below already has an empty "slot".
+               To fill a slot, put your real files in the folder shown here
+               (replace the placeholder index.html and style.css):
+
+               AI Management                -> projects/ai-management/
+               Apple                        -> projects/apple/
+               Apple Site                   -> projects/apple-site/
+               Bank Logos                   -> projects/bank-logos/
+               House Animation              -> projects/house-animation/
+               Logistics                    -> projects/logistics/
+               LUDO DESIGN                  -> projects/ludo-design/
+               Man Walking                  -> projects/man-walking/
+               Motion Project               -> projects/motion-project/
+               Movie Website                -> projects/movie-website/
+               Palmpay                      -> projects/palmpay/
+               Printivo                     -> projects/printivo/
+               Printivo Site                -> projects/printivo-site/
+               She Leads Africa             -> projects/she-leads-africa/
+               sla practice                 -> projects/sla-practice/
+               SLA Site                     -> projects/sla-site/
+               Solar System                 -> projects/solar-system/
+               The Digital World            -> projects/digital-world/
+               Thoughtbot Blog Website      -> projects/thoughtbot-blog-website/
+               Tourism                      -> projects/tourism/
+               Web.Dev                      -> projects/web-dev/
+               Project 22 ... Project 30    -> projects/project-22/ ... projects/project-30/
+                                              (spare slots: rename them or delete them)
+
+               Then update the two helper files for that project:
+                 projects/NAME/index.html.txt   (a COPY of your index.html)
+                 downloads/NAME.zip             (a zip of the project folder)
+
+               To RENAME a spare slot, change its name in 3 places in this file
+               (search for "Project 22"): the folder icon, the path bar and the title="".
+               To DELETE a slot, remove its 3 pieces from this file (the radio,
+               the folder icon and the project page) and its rule in style.css.
+               ==================================================================== -->
+
+          <!-- THING 1: one radio button per project. It remembers which folder is open. -->
+          <input
+            type="radio"
+            name="folder"
+            id="folder-home"
+            class="state-toggle"
+            checked
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-ai-management"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-apple"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-apple-site"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-bank-logos"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-house-animation"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-logistics"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-ludo-design"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-man-walking"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-motion-project"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-movie-website"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-palmpay"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-printivo"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-printivo-site"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-she-leads-africa"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-sla-practice"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-sla-site"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-solar-system"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-digital-world"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-thoughtbot-blog-website"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-tourism"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-web-dev"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-22"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-23"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-24"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-25"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-26"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-27"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-28"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-29"
+            class="state-toggle"
+          />
+          <input
+            type="radio"
+            name="folder"
+            id="folder-project-30"
+            class="state-toggle"
+          />
+          <!-- ADD A NEW PROJECT RADIO ABOVE THIS LINE -->
+
+          <!-- ---------- HOME VIEW: the folder icons ---------- -->
+          <div class="view view-home">
+            <div class="explorer-bar">
+              <span class="back-btn back-off">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </span>
+              <div class="path">
+                <span>Projects</span>
+              </div>
+              <a
+                href="downloads/all-projects.zip"
+                download
+                class="bar-btn"
+                title="Download every project as one zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download all</span>
+              </a>
+            </div>
+
+            <div class="folders">
+              <!-- THING 2: one folder icon per project. Clicking it selects its radio. -->
+              <label for="folder-ai-management" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>AI Management</span>
+              </label>
+              <label for="folder-apple" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Apple</span>
+              </label>
+              <label for="folder-apple-site" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Apple Site</span>
+              </label>
+              <label for="folder-bank-logos" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Bank Logos</span>
+              </label>
+              <label for="folder-house-animation" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>House Animation</span>
+              </label>
+              <label for="folder-logistics" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Logistics</span>
+              </label>
+              <label for="folder-ludo-design" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>LUDO DESIGN</span>
+              </label>
+              <label for="folder-man-walking" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Man Walking</span>
+              </label>
+              <label for="folder-motion-project" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Motion Project</span>
+              </label>
+              <label for="folder-movie-website" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Movie Website</span>
+              </label>
+              <label for="folder-palmpay" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Palmpay</span>
+              </label>
+              <label for="folder-printivo" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Printivo</span>
+              </label>
+              <label for="folder-printivo-site" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Printivo Site</span>
+              </label>
+              <label for="folder-she-leads-africa" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>She Leads Africa</span>
+              </label>
+              <label for="folder-sla-practice" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>sla practice</span>
+              </label>
+              <label for="folder-sla-site" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>SLA Site</span>
+              </label>
+              <label for="folder-solar-system" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Solar System</span>
+              </label>
+              <label for="folder-digital-world" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>The Digital World</span>
+              </label>
+              <label for="folder-thoughtbot-blog-website" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Thoughtbot Blog Website</span>
+              </label>
+              <label for="folder-tourism" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Tourism</span>
+              </label>
+              <label for="folder-web-dev" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Web.Dev</span>
+              </label>
+              <label for="folder-project-22" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 22</span>
+              </label>
+              <label for="folder-project-23" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 23</span>
+              </label>
+              <label for="folder-project-24" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 24</span>
+              </label>
+              <label for="folder-project-25" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 25</span>
+              </label>
+              <label for="folder-project-26" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 26</span>
+              </label>
+              <label for="folder-project-27" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 27</span>
+              </label>
+              <label for="folder-project-28" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 28</span>
+              </label>
+              <label for="folder-project-29" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 29</span>
+              </label>
+              <label for="folder-project-30" class="folder">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    class="folder-back"
+                    d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                  <path
+                    class="folder-front"
+                    d="M2 10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+                <span>Project 30</span>
+              </label>
+              <!-- ADD A NEW FOLDER ICON ABOVE THIS LINE -->
+            </div>
+          </div>
+
+          <!-- THING 3: one page per project: Back button, path, Download button,
+               the list of files, and the code viewer. -->
+
+          <!-- ---------- PROJECT: AI Management ---------- -->
+          <div class="view view-ai-management">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>AI Management</span>
+              </div>
+              <a
+                href="downloads/ai-management.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/ai-management/index.html.txt"
+                    target="code-ai-management"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/ai-management/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/ai-management/style.css"
+                    target="code-ai-management"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-ai-management"
+                src="projects/ai-management/index.html.txt"
+                title="Code of AI Management"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Apple ---------- -->
+          <div class="view view-apple">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Apple</span>
+              </div>
+              <a
+                href="downloads/apple.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/apple/index.html.txt"
+                    target="code-apple"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/apple/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/apple/style.css"
+                    target="code-apple"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-apple"
+                src="projects/apple/index.html.txt"
+                title="Code of Apple"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Apple Site ---------- -->
+          <div class="view view-apple-site">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Apple Site</span>
+              </div>
+              <a
+                href="downloads/apple-site.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/apple-site/index.html.txt"
+                    target="code-apple-site"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/apple-site/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/apple-site/style.css"
+                    target="code-apple-site"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-apple-site"
+                src="projects/apple-site/index.html.txt"
+                title="Code of Apple Site"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Bank Logos ---------- -->
+          <div class="view view-bank-logos">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Bank Logos</span>
+              </div>
+              <a
+                href="downloads/bank-logos.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/bank-logos/index.html.txt"
+                    target="code-bank-logos"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/bank-logos/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/bank-logos/style.css"
+                    target="code-bank-logos"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-bank-logos"
+                src="projects/bank-logos/index.html.txt"
+                title="Code of Bank Logos"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: House Animation ---------- -->
+          <div class="view view-house-animation">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>House Animation</span>
+              </div>
+              <a
+                href="downloads/house-animation.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/house-animation/index.html.txt"
+                    target="code-house-animation"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/house-animation/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/house-animation/style.css"
+                    target="code-house-animation"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-house-animation"
+                src="projects/house-animation/index.html.txt"
+                title="Code of House Animation"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Logistics ---------- -->
+          <div class="view view-logistics">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Logistics</span>
+              </div>
+              <a
+                href="downloads/logistics.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/logistics/index.html.txt"
+                    target="code-logistics"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/logistics/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/logistics/style.css"
+                    target="code-logistics"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-logistics"
+                src="projects/logistics/index.html.txt"
+                title="Code of Logistics"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: LUDO DESIGN ---------- -->
+          <div class="view view-ludo-design">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>LUDO DESIGN</span>
+              </div>
+              <a
+                href="downloads/ludo-design.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/ludo-design/index.html.txt"
+                    target="code-ludo-design"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/ludo-design/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/ludo-design/style.css"
+                    target="code-ludo-design"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-ludo-design"
+                src="projects/ludo-design/index.html.txt"
+                title="Code of LUDO DESIGN"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Man Walking ---------- -->
+          <div class="view view-man-walking">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Man Walking</span>
+              </div>
+              <a
+                href="downloads/man-walking.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/man-walking/index.html.txt"
+                    target="code-man-walking"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/man-walking/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/man-walking/style.css"
+                    target="code-man-walking"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-man-walking"
+                src="projects/man-walking/index.html.txt"
+                title="Code of Man Walking"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Motion Project ---------- -->
+          <div class="view view-motion-project">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Motion Project</span>
+              </div>
+              <a
+                href="downloads/motion-project.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/motion-project/index.html.txt"
+                    target="code-motion-project"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/motion-project/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/motion-project/style.css"
+                    target="code-motion-project"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-motion-project"
+                src="projects/motion-project/index.html.txt"
+                title="Code of Motion Project"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Movie Website ---------- -->
+          <div class="view view-movie-website">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Movie Website</span>
+              </div>
+              <a
+                href="downloads/movie-website.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/movie-website/index.html.txt"
+                    target="code-movie-website"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/movie-website/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/movie-website/style.css"
+                    target="code-movie-website"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-movie-website"
+                src="projects/movie-website/index.html.txt"
+                title="Code of Movie Website"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Palmpay ---------- -->
+          <div class="view view-palmpay">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Palmpay</span>
+              </div>
+              <a
+                href="downloads/palmpay.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/palmpay/index.html.txt"
+                    target="code-palmpay"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/palmpay/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/palmpay/style.css"
+                    target="code-palmpay"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-palmpay"
+                src="projects/palmpay/index.html.txt"
+                title="Code of Palmpay"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Printivo ---------- -->
+          <div class="view view-printivo">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Printivo</span>
+              </div>
+              <a
+                href="downloads/printivo.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/printivo/index.html.txt"
+                    target="code-printivo"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/printivo/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/printivo/style.css"
+                    target="code-printivo"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-printivo"
+                src="projects/printivo/index.html.txt"
+                title="Code of Printivo"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Printivo Site ---------- -->
+          <div class="view view-printivo-site">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Printivo Site</span>
+              </div>
+              <a
+                href="downloads/printivo-site.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/printivo-site/index.html.txt"
+                    target="code-printivo-site"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/printivo-site/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/printivo-site/style.css"
+                    target="code-printivo-site"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-printivo-site"
+                src="projects/printivo-site/index.html.txt"
+                title="Code of Printivo Site"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: She Leads Africa ---------- -->
+          <div class="view view-she-leads-africa">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>She Leads Africa</span>
+              </div>
+              <a
+                href="downloads/she-leads-africa.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/she-leads-africa/index.html.txt"
+                    target="code-she-leads-africa"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/she-leads-africa/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/she-leads-africa/style.css"
+                    target="code-she-leads-africa"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-she-leads-africa"
+                src="projects/she-leads-africa/index.html.txt"
+                title="Code of She Leads Africa"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: sla practice ---------- -->
+          <div class="view view-sla-practice">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>sla practice</span>
+              </div>
+              <a
+                href="downloads/sla-practice.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/sla-practice/index.html.txt"
+                    target="code-sla-practice"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/sla-practice/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/sla-practice/style.css"
+                    target="code-sla-practice"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-sla-practice"
+                src="projects/sla-practice/index.html.txt"
+                title="Code of sla practice"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: SLA Site ---------- -->
+          <div class="view view-sla-site">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>SLA Site</span>
+              </div>
+              <a
+                href="downloads/sla-site.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/sla-site/index.html.txt"
+                    target="code-sla-site"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/sla-site/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/sla-site/style.css"
+                    target="code-sla-site"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-sla-site"
+                src="projects/sla-site/index.html.txt"
+                title="Code of SLA Site"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Solar System ---------- -->
+          <div class="view view-solar-system">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Solar System</span>
+              </div>
+              <a
+                href="downloads/solar-system.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/solar-system/index.html.txt"
+                    target="code-solar-system"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/solar-system/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/solar-system/style.css"
+                    target="code-solar-system"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-solar-system"
+                src="projects/solar-system/index.html.txt"
+                title="Code of Solar System"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: The Digital World ---------- -->
+          <div class="view view-digital-world">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>The Digital World</span>
+              </div>
+              <a
+                href="downloads/digital-world.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/digital-world/index.html.txt"
+                    target="code-digital-world"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/digital-world/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/digital-world/style.css"
+                    target="code-digital-world"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-digital-world"
+                src="projects/digital-world/index.html.txt"
+                title="Code of The Digital World"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Thoughtbot Blog Website ---------- -->
+          <div class="view view-thoughtbot-blog-website">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Thoughtbot Blog Website</span>
+              </div>
+              <a
+                href="downloads/thoughtbot-blog-website.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/thoughtbot-blog-website/index.html.txt"
+                    target="code-thoughtbot-blog-website"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/thoughtbot-blog-website/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/thoughtbot-blog-website/style.css"
+                    target="code-thoughtbot-blog-website"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-thoughtbot-blog-website"
+                src="projects/thoughtbot-blog-website/index.html.txt"
+                title="Code of Thoughtbot Blog Website"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Tourism ---------- -->
+          <div class="view view-tourism">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Tourism</span>
+              </div>
+              <a
+                href="downloads/tourism.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/tourism/index.html.txt"
+                    target="code-tourism"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/tourism/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/tourism/style.css"
+                    target="code-tourism"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-tourism"
+                src="projects/tourism/index.html.txt"
+                title="Code of Tourism"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Web.Dev ---------- -->
+          <div class="view view-web-dev">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Web.Dev</span>
+              </div>
+              <a
+                href="downloads/web-dev.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/web-dev/index.html.txt"
+                    target="code-web-dev"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/web-dev/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/web-dev/style.css"
+                    target="code-web-dev"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-web-dev"
+                src="projects/web-dev/index.html.txt"
+                title="Code of Web.Dev"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 22 ---------- -->
+          <div class="view view-project-22">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 22</span>
+              </div>
+              <a
+                href="downloads/project-22.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-22/index.html.txt"
+                    target="code-project-22"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-22/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-22/style.css"
+                    target="code-project-22"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-22"
+                src="projects/project-22/index.html.txt"
+                title="Code of Project 22"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 23 ---------- -->
+          <div class="view view-project-23">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 23</span>
+              </div>
+              <a
+                href="downloads/project-23.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-23/index.html.txt"
+                    target="code-project-23"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-23/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-23/style.css"
+                    target="code-project-23"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-23"
+                src="projects/project-23/index.html.txt"
+                title="Code of Project 23"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 24 ---------- -->
+          <div class="view view-project-24">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 24</span>
+              </div>
+              <a
+                href="downloads/project-24.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-24/index.html.txt"
+                    target="code-project-24"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-24/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-24/style.css"
+                    target="code-project-24"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-24"
+                src="projects/project-24/index.html.txt"
+                title="Code of Project 24"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 25 ---------- -->
+          <div class="view view-project-25">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 25</span>
+              </div>
+              <a
+                href="downloads/project-25.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-25/index.html.txt"
+                    target="code-project-25"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-25/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-25/style.css"
+                    target="code-project-25"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-25"
+                src="projects/project-25/index.html.txt"
+                title="Code of Project 25"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 26 ---------- -->
+          <div class="view view-project-26">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 26</span>
+              </div>
+              <a
+                href="downloads/project-26.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-26/index.html.txt"
+                    target="code-project-26"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-26/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-26/style.css"
+                    target="code-project-26"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-26"
+                src="projects/project-26/index.html.txt"
+                title="Code of Project 26"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 27 ---------- -->
+          <div class="view view-project-27">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 27</span>
+              </div>
+              <a
+                href="downloads/project-27.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-27/index.html.txt"
+                    target="code-project-27"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-27/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-27/style.css"
+                    target="code-project-27"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-27"
+                src="projects/project-27/index.html.txt"
+                title="Code of Project 27"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 28 ---------- -->
+          <div class="view view-project-28">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 28</span>
+              </div>
+              <a
+                href="downloads/project-28.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-28/index.html.txt"
+                    target="code-project-28"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-28/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-28/style.css"
+                    target="code-project-28"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-28"
+                src="projects/project-28/index.html.txt"
+                title="Code of Project 28"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 29 ---------- -->
+          <div class="view view-project-29">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 29</span>
+              </div>
+              <a
+                href="downloads/project-29.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-29/index.html.txt"
+                    target="code-project-29"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-29/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-29/style.css"
+                    target="code-project-29"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-29"
+                src="projects/project-29/index.html.txt"
+                title="Code of Project 29"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ---------- PROJECT: Project 30 ---------- -->
+          <div class="view view-project-30">
+            <div class="explorer-bar">
+              <label for="folder-home" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <span>Back</span>
+              </label>
+              <div class="path">
+                <span>Projects</span>
+                <svg class="chevron" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Project 30</span>
+              </div>
+              <a
+                href="downloads/project-30.zip"
+                download
+                class="bar-btn"
+                title="Download this project as a zip file"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <div class="project-body">
+              <div class="file-list">
+                <p class="file-list-title">Files</p>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-30/index.html.txt"
+                    target="code-project-30"
+                    class="file-name file-html"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M10 13l-2 2 2 2M14 13l2 2-2 2" />
+                    </svg>
+                    <span>index.html</span>
+                  </a>
+                  <a
+                    href="projects/project-30/index.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="file-open"
+                    title="Open in your browser"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                      />
+                    </svg>
+                    <span>Open</span>
+                  </a>
+                </div>
+
+                <div class="file-row">
+                  <a
+                    href="projects/project-30/style.css"
+                    target="code-project-30"
+                    class="file-name file-css"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h8l5 5v13H6z" />
+                      <path d="M14 3v5h5" />
+                      <path d="M9 13h6M9 17h4" />
+                    </svg>
+                    <span>style.css</span>
+                  </a>
+                </div>
+              </div>
+              <iframe
+                name="code-project-30"
+                src="projects/project-30/index.html.txt"
+                title="Code of Project 30"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- ADD A NEW PROJECT PAGE ABOVE THIS LINE -->
+        </div>
+      </div>
+
+      <!-- ---------- SKILLS WINDOW ---------- -->
+      <div class="window win-skills">
+        <div class="title-bar">
+          <span class="title-text">Skills</span>
+          <div class="title-buttons">
+            <label
+              for="skills-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="skills-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="skills-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="skills-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <!-- SKILLS: each skill is one block. Change the name, and change the
+             percentage in TWO places: the number text and style="width: 90%" -->
+        <div class="window-body">
+          <h2>Skills</h2>
+          <p class="skills-intro">
+            Things I know, and what I am still learning.
+          </p>
+          <div class="skill">
+            <div class="skill-top">
+              <span>HTML</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill-top">
+              <span>CSS</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill-top">
+              <span>Responsive Design</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill-top">
+              <span>CSS Animation</span>
+              <span>70%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill-top">
+              <span>Problem Solving</span>
+              <span>75%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill-top">
+              <span>JavaScript (learning)</span>
+              <span>25%</span>
+            </div>
+            <div class="skill-track">
+              <div class="skill-fill" style="width: 25%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- RESUME WINDOW ---------- -->
+      <div class="window win-resume">
+        <div class="title-bar">
+          <span class="title-text">Resume</span>
+          <div class="title-buttons">
+            <label
+              for="resume-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="resume-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="resume-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="resume-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <!-- RESUME: change the text to your own. The download button gives people
+             the file  resume/Ayobami-Resume.pdf  (replace that file with your real CV) -->
+        <div class="window-body">
+          <div class="resume-head">
+            <div>
+              <h2 class="resume-name">Ayobami</h2>
+              <p class="resume-role">Front-End Developer (Student)</p>
+            </div>
+            <a
+              href="resume/Ayobami-Resume.pdf"
+              download
+              class="resume-download"
+              title="Download my resume as a PDF"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+              </svg>
+              <span>Download PDF</span>
+            </a>
+          </div>
+
+          <h3 class="resume-title">Summary</h3>
+          <p class="resume-text">
+            Level 1 student at SQI College of ICT who builds websites with HTML
+            and CSS. I have built more than 20 projects, including websites,
+            animations and a working operating system made with no JavaScript.
+          </p>
+
+          <h3 class="resume-title">Education</h3>
+          <div class="resume-item">
+            <b>SQI College of ICT</b>
+            <span>Level 1 - completed</span>
+          </div>
+
+          <h3 class="resume-title">Skills</h3>
+          <div class="resume-tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Responsive Design</span>
+            <span>CSS Animation</span>
+          </div>
+
+          <h3 class="resume-title">Projects</h3>
+          <p class="resume-text">
+            Websites, animations and design work. Open the Projects app to see
+            the code and run each one.
+          </p>
+          <label for="projects-open" class="resume-link">Open Projects</label>
+        </div>
+      </div>
+
+      <!-- ---------- CONTACT WINDOW ---------- -->
+      <div class="window win-contact">
+        <div class="title-bar">
+          <span class="title-text">Contact</span>
+          <div class="title-buttons">
+            <label
+              for="contact-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="contact-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="contact-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="contact-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <!-- CONTACT: replace every your-... with your real details.
+             Each card is a normal link: change the href="" and the text. -->
+        <div class="window-body">
+          <h2>Get in touch</h2>
+          <p class="contact-intro">
+            I would love to hear from you. Pick any link below.
+          </p>
+          <div class="contact-list">
+            <a href="mailto:your-email@example.com" class="contact-card">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M3 7l9 6 9-6" />
+              </svg>
+              <div class="contact-text">
+                <b>Email</b>
+                <span>your-email@example.com</span>
+              </div>
+            </a>
+            <a
+              href="https://github.com/your-username"
+              target="_blank"
+              rel="noopener"
+              class="contact-card"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.4 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5.1 5.1 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5.1 5.1 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V22"
+                />
+              </svg>
+              <div class="contact-text">
+                <b>GitHub</b>
+                <span>github.com/your-username</span>
+              </div>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/your-name"
+              target="_blank"
+              rel="noopener"
+              class="contact-card"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+              <div class="contact-text">
+                <b>LinkedIn</b>
+                <span>linkedin.com/in/your-name</span>
+              </div>
+            </a>
+            <a
+              href="https://wa.me/2348000000000"
+              target="_blank"
+              rel="noopener"
+              class="contact-card"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"
+                />
+              </svg>
+              <div class="contact-text">
+                <b>WhatsApp</b>
+                <span>+234 800 000 0000</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- NOTEPAD WINDOW ---------- -->
+      <div class="window win-notepad">
+        <div class="title-bar">
+          <span class="title-text">Notepad</span>
+          <div class="title-buttons">
+            <label
+              for="notepad-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="notepad-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="notepad-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="notepad-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <!-- NOTEPAD: a real text box. Type in it. The text stays until the page is refreshed. -->
+        <div class="notepad">
+          <textarea
+            class="notepad-text"
+            spellcheck="false"
+            placeholder="Start typing..."
+          >
+Welcome to Notepad!
+
+Click here and type anything you like.
+Your text stays here while this page is open.</textarea
+          >
+          <div class="notepad-status">
+            <span>Plain text</span>
+            <span>UTF-8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- SETTINGS WINDOW ---------- -->
+      <div class="window win-settings">
+        <div class="title-bar">
+          <span class="title-text">Settings</span>
+          <div class="title-buttons">
+            <label
+              for="settings-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="settings-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="settings-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="settings-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <div class="window-body">
+          <h2>Settings</h2>
+          <p>Settings will go here (Step 7).</p>
+        </div>
+      </div>
+
+      <!-- ---------- RECYCLE BIN WINDOW ---------- -->
+      <div class="window win-bin">
+        <div class="title-bar">
+          <span class="title-text">Recycle Bin</span>
+          <div class="title-buttons">
+            <label
+              for="bin-min"
+              class="win-btn btn-min"
+              title="Minimize"
+            ></label>
+            <label
+              for="bin-max"
+              class="win-btn btn-max"
+              title="Maximize"
+            ></label>
+            <label
+              for="bin-open"
+              class="win-btn btn-restore"
+              title="Restore"
+            ></label>
+            <label
+              for="bin-closed"
+              class="win-btn btn-close"
+              title="Close"
+            ></label>
+          </div>
+        </div>
+
+        <div class="window-body">
+          <h2>Recycle Bin</h2>
+          <p>The Recycle Bin is empty.</p>
+        </div>
+      </div>
+
+      <!-- ========== WINDOWS 11 TASKBAR ==========
+           3 zones:  LEFT (start + search)  |  MIDDLE (pinned apps)  |  RIGHT (tray)
+           Pinned apps are labels that point at the SAME "open" radio
+           as the desktop icons, so they open the same windows.
+           To pin another app: copy one <label> below and change
+           the for="" name, the tb-name class, the colour and the SVG. -->
+      <div class="win11-taskbar">
+        <!-- LEFT -->
+        <div class="tb-left">
+          <div class="start-button" title="Start">
+            <span class="logo-red"></span>
+            <span class="logo-green"></span>
+            <span class="logo-blue"></span>
+            <span class="logo-yellow"></span>
+            <!-- menu closed: this one OPENS it. menu open: the second one CLOSES it -->
+            <label for="sys-start" class="start-hit open-hit"></label>
+            <label for="sys-desktop" class="start-hit close-hit"></label>
+          </div>
+
+          <div class="search-box">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="M16 16l5 5" />
+            </svg>
+            <input type="text" class="search-input" placeholder="Search" />
+          </div>
+        </div>
+
+        <!-- MIDDLE: pinned apps -->
+        <div class="tb-center">
+          <!-- Projects -->
+          <label
+            for="projects-open"
+            class="tb-app tb-projects icon-yellow"
+            title="Projects"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+              />
+            </svg>
+          </label>
+          <!-- About Me -->
+          <label
+            for="about-open"
+            class="tb-app tb-about icon-blue"
+            title="About Me"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+          </label>
+          <!-- Skills -->
+          <label
+            for="skills-open"
+            class="tb-app tb-skills icon-purple"
+            title="Skills"
+          >
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 3 14.8 9 21.5 9.8 16.5 14.4 17.9 21 12 17.7 6.1 21 7.5 14.4 2.5 9.8 9.2 9"
+              />
+            </svg>
+          </label>
+          <!-- Resume -->
+          <label
+            for="resume-open"
+            class="tb-app tb-resume icon-green"
+            title="Resume"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M6 3h8l5 5v13H6z" />
+              <path d="M14 3v5h5" />
+              <path d="M9 13h7M9 17h5" />
+            </svg>
+          </label>
+          <!-- Contact -->
+          <label
+            for="contact-open"
+            class="tb-app tb-contact icon-orange"
+            title="Contact"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3 7l9 6 9-6" />
+            </svg>
+          </label>
+          <!-- Notepad -->
+          <label
+            for="notepad-open"
+            class="tb-app tb-notepad icon-pink"
+            title="Notepad"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="5" y="3" width="14" height="18" rx="2" />
+              <path d="M9 8h6M9 12h6M9 16h4" />
+            </svg>
+          </label>
+        </div>
+
+        <!-- RIGHT: system tray (all fixed text, CSS cannot read the real time) -->
+        <div class="tb-right">
+          <div class="tray-group">
+            <!-- wifi -->
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"
+              />
+              <circle cx="12" cy="19.5" r="1" fill="white" />
+            </svg>
+            <!-- sound -->
+            <svg viewBox="0 0 24 24">
+              <polygon points="3 9 7 9 12 5 12 19 7 15 3 15" />
+              <path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" />
+            </svg>
+            <!-- battery -->
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="7" width="18" height="10" rx="2" />
+              <path d="M22 10.5v3" />
+              <rect x="4.5" y="9.5" width="10" height="5" fill="white" />
+            </svg>
+          </div>
+
+          <!-- notification bell with a red dot -->
+          <div class="tray-bell">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z" />
+              <path d="M10 21h4" />
+            </svg>
+            <span class="notif-dot"></span>
+          </div>
+
+          <!-- time and date -->
+          <div class="tray-clock">
+            <span>19:46</span>
+            <span>31/10/26</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== START MENU ==========
+           Opens when the "sys-start" radio is selected.
+           The invisible label below covers the whole screen behind the menu,
+           so clicking anywhere outside the menu selects "sys-desktop" = closes it. -->
+      <label for="sys-desktop" class="start-overlay"></label>
+
+      <div class="start-menu">
+        <div class="start-search">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="M16 16l5 5" />
+          </svg>
+          <input
+            type="text"
+            class="start-search-input"
+            placeholder="Search for apps and files"
+          />
+        </div>
+
+        <p class="start-heading">Pinned</p>
+        <div class="start-grid">
+          <label for="about-open" class="start-app icon-blue">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+            <span>About Me</span>
+          </label>
+          <label for="projects-open" class="start-app icon-yellow">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+              />
+            </svg>
+            <span>Projects</span>
+          </label>
+          <label for="skills-open" class="start-app icon-purple">
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 3 14.8 9 21.5 9.8 16.5 14.4 17.9 21 12 17.7 6.1 21 7.5 14.4 2.5 9.8 9.2 9"
+              />
+            </svg>
+            <span>Skills</span>
+          </label>
+          <label for="resume-open" class="start-app icon-green">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 3h8l5 5v13H6z" />
+              <path d="M14 3v5h5" />
+              <path d="M9 13h7M9 17h5" />
+            </svg>
+            <span>Resume</span>
+          </label>
+          <label for="contact-open" class="start-app icon-orange">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3 7l9 6 9-6" />
+            </svg>
+            <span>Contact</span>
+          </label>
+          <label for="notepad-open" class="start-app icon-pink">
+            <svg viewBox="0 0 24 24">
+              <rect x="5" y="3" width="14" height="18" rx="2" />
+              <path d="M9 8h6M9 12h6M9 16h4" />
+            </svg>
+            <span>Notepad</span>
+          </label>
+          <label for="settings-open" class="start-app icon-grey">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2.5" />
+              <path
+                d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"
+              />
+            </svg>
+            <span>Settings</span>
+          </label>
+          <label for="bin-open" class="start-app icon-teal">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
+            </svg>
+            <span>Recycle Bin</span>
+          </label>
+        </div>
+
+        <!-- bottom bar: user on the left, Lock and Shut down on the right -->
+        <div class="start-bottom">
+          <div class="start-user">
+            <img src="images/The user-image.jpg" alt="" class="start-avatar" />
+            <span>Ayobami</span>
+          </div>
+
+          <div class="start-power">
+            <!-- Lock = go back to the lock screen -->
+            <label for="sys-lock" class="power-btn" title="Lock">
+              <svg viewBox="0 0 24 24">
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+              </svg>
+              <span>Lock</span>
+            </label>
+            <!-- Shut down = black screen -->
+            <label for="sys-off" class="power-btn" title="Shut down">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3v8" />
+                <path d="M6.5 6.5a8 8 0 1 0 11 0" />
+              </svg>
+              <span>Shut down</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shut down screen: click anywhere to turn the computer back on (lock screen) -->
+    <label for="sys-lock" class="power-off">Click anywhere to turn on</label>
+  </body>
+</html>

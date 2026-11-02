@@ -1,0 +1,1897 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  color: #ffffff;
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+  background: #0b0f19;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- THE PURE CSS STATE CONTROLLERS --- */
+.state-toggle {
+  display: none; /* Hides both control checkboxes */
+}
+
+/* --- BACKGROUND MANAGEMENT --- */
+.os-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition:
+    filter 0.8s ease-in-out,
+    opacity 0.8s ease-in-out;
+}
+/* Lock Screen Background (Blurred Bloom effect) */
+.bg-lock {
+  /* background: radial-gradient(circle at center, #2d3856 0%, #0b0f19 100%); */
+  background-image: url(images/Windows\ Lock\ Screen.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+/* Desktop Background (Clearer, lighter bloom) */
+.bg-desktop {
+  /* background: radial-gradient(circle at center, #3a4874 0%, #05070b 100%); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+/* --- LAYER 1: LOCK SCREEN CLOCK --- */
+.click-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.lock-screen-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 200px;
+  z-index: 4;
+  transition:
+    transform 0.6s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
+
+.win11-time {
+  font-size: 10rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.win11-date {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-top: 12px;
+}
+
+/* --- LAYER 2: WINDOWS 11 SIGN-IN PANEL --- */
+.sign-in-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    transform 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.3),
+    opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.user-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 6px 40px 6px 12px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 3px #25a2f5;
+  border-radius: 4px;
+  color: rgba(243, 243, 243, 0.432) 70b;
+  outline: none;
+}
+
+.password-input::placeholder {
+  font-family: monospace;
+  font-size: 15px;
+  color: #cecece;
+}
+
+.password-input[placeholder="Password"] {
+  color: #fff;
+  font-size: 20px;
+}
+
+/* CSS-only replacement for the old onfocus/onblur JavaScript:
+   when you click inside the box, the "Password" hint fades away.
+   When you click out and the box is empty, it fades back in. */
+.password-input::placeholder {
+  transition: color 0.2s;
+}
+.password-input:focus::placeholder {
+  color: transparent;
+}
+
+/* Arrow button styled as an HTML Label link */
+.submit-label-btn {
+  cursor: pointer;
+  position: relative;
+  right: 30px;
+}
+
+.one {
+  border: 1px solid #919191;
+  width: 20px;
+}
+
+.two {
+  border: 1px solid #919191;
+  width: 10px;
+  transform: rotate(40deg);
+  position: relative;
+  right: 40px;
+  bottom: 4px;
+}
+
+.three {
+  border: 1px solid #919191;
+  width: 10px;
+  transform: rotate(-40deg);
+  position: relative;
+  right: 49px;
+  top: 4px;
+}
+
+.submit-label-btn:hover {
+  color: #60cdff;
+}
+
+/* --- LAYER 3: WINDOWS 11 DESKTOP --- */
+.desktop-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    transform 0.6s cubic-bezier(0.1, 0.9, 0.2, 1),
+    opacity 0.5s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Pushes taskbar to bottom */
+}
+
+/* =========================================================
+   STEP 3: WINDOWS 11 TASKBAR
+   ========================================================= */
+
+/* The bar itself. z-index keeps it ABOVE any window.
+   justify-content: space-between pushes the 3 zones apart. */
+.win11-taskbar {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 48px;
+  background: rgba(28, 28, 28, 0.85);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+}
+
+/* Left and right zones both take equal space (flex: 1),
+   which keeps the middle zone perfectly centered. */
+.tb-left,
+.tb-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.tb-right {
+  justify-content: flex-end;
+}
+.tb-center {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --- Start button: the 4-colour logo made from 4 small squares --- */
+.start-button {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.start-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.start-button span {
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+}
+.logo-red {
+  background: #f25022;
+}
+.logo-green {
+  background: #7fba00;
+}
+.logo-blue {
+  background: #00a4ef;
+}
+.logo-yellow {
+  background: #ffb900;
+}
+
+/* --- Search box --- */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 190px;
+  height: 32px;
+  margin-left: 6px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.search-box svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #d0d0d0;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.search-input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 12px;
+  user-select: text;
+}
+.search-input::placeholder {
+  color: #c4c4c4;
+}
+
+/* --- Pinned apps in the middle --- */
+.tb-app {
+  position: relative;
+  width: 42px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tb-app:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.tb-app svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.1s;
+}
+/* little "press" effect when you click */
+.tb-app:active svg {
+  transform: scale(0.85);
+}
+
+/* The small bar under an icon. Hidden (width 0) until its window is open. */
+.tb-app::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 21px;
+  width: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: #60cdff;
+  transition:
+    width 0.2s,
+    left 0.2s;
+}
+
+/* OPEN or MAXIMIZED window -> long blue bar + soft highlight.
+   "#about-open:checked ~ .desktop-screen .tb-about" means:
+   "if the About Me radio is ticked as open, change the About Me taskbar icon". */
+#projects-open:checked ~ .desktop-screen .tb-projects,
+#projects-max:checked ~ .desktop-screen .tb-projects,
+#about-open:checked ~ .desktop-screen .tb-about,
+#about-max:checked ~ .desktop-screen .tb-about,
+#skills-open:checked ~ .desktop-screen .tb-skills,
+#skills-max:checked ~ .desktop-screen .tb-skills,
+#resume-open:checked ~ .desktop-screen .tb-resume,
+#resume-max:checked ~ .desktop-screen .tb-resume,
+#contact-open:checked ~ .desktop-screen .tb-contact,
+#contact-max:checked ~ .desktop-screen .tb-contact,
+#notepad-open:checked ~ .desktop-screen .tb-notepad,
+#notepad-max:checked ~ .desktop-screen .tb-notepad {
+  background: rgba(255, 255, 255, 0.07);
+}
+#projects-open:checked ~ .desktop-screen .tb-projects::after,
+#projects-max:checked ~ .desktop-screen .tb-projects::after,
+#about-open:checked ~ .desktop-screen .tb-about::after,
+#about-max:checked ~ .desktop-screen .tb-about::after,
+#skills-open:checked ~ .desktop-screen .tb-skills::after,
+#skills-max:checked ~ .desktop-screen .tb-skills::after,
+#resume-open:checked ~ .desktop-screen .tb-resume::after,
+#resume-max:checked ~ .desktop-screen .tb-resume::after,
+#contact-open:checked ~ .desktop-screen .tb-contact::after,
+#contact-max:checked ~ .desktop-screen .tb-contact::after,
+#notepad-open:checked ~ .desktop-screen .tb-notepad::after,
+#notepad-max:checked ~ .desktop-screen .tb-notepad::after {
+  width: 16px;
+  left: 13px;
+}
+
+/* MINIMIZED window -> only a short grey dot-bar (click the icon to bring it back) */
+#projects-min:checked ~ .desktop-screen .tb-projects::after,
+#about-min:checked ~ .desktop-screen .tb-about::after,
+#skills-min:checked ~ .desktop-screen .tb-skills::after,
+#resume-min:checked ~ .desktop-screen .tb-resume::after,
+#contact-min:checked ~ .desktop-screen .tb-contact::after,
+#notepad-min:checked ~ .desktop-screen .tb-notepad::after {
+  width: 6px;
+  left: 18px;
+  background: #9a9a9a;
+}
+
+/* --- System tray (right side) --- */
+.tray-group,
+.tray-bell,
+.tray-clock {
+  height: 36px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.tray-group:hover,
+.tray-bell:hover,
+.tray-clock:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tray-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+}
+.tray-group svg,
+.tray-bell svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tray-bell {
+  position: relative;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #e81123;
+  border: 2px solid #1c1c1c;
+}
+
+.tray-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 10px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+/* --- THE CSS TRANSITION FLOW LOGIC ---
+   Same ideas as before, but now driven by ONE group of radio buttons
+   (sys-lock / sys-signin / sys-desktop / sys-start / sys-off). */
+
+/* SIGN-IN, DESKTOP and START: the lock-screen clock slides away
+   and the "click to continue" layer is removed */
+#sys-signin:checked ~ .lock-screen-content,
+#sys-desktop:checked ~ .lock-screen-content,
+#sys-start:checked ~ .lock-screen-content {
+  transform: translateY(-80px);
+  opacity: 0;
+  pointer-events: none;
+}
+#sys-signin:checked ~ .click-surface,
+#sys-desktop:checked ~ .click-surface,
+#sys-start:checked ~ .click-surface {
+  display: none;
+}
+
+/* SIGN-IN: show the password screen, blur the wallpaper */
+#sys-signin:checked ~ .sign-in-screen {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+#sys-signin:checked ~ .bg-lock {
+  filter: blur(20px) brightness(0.8);
+}
+
+/* DESKTOP and START: the login screen drops away, the desktop appears */
+#sys-desktop:checked ~ .sign-in-screen,
+#sys-start:checked ~ .sign-in-screen {
+  transform: translateY(100vh);
+  opacity: 0;
+  pointer-events: none;
+}
+#sys-desktop:checked ~ .bg-lock,
+#sys-start:checked ~ .bg-lock {
+  opacity: 0;
+}
+#sys-desktop:checked ~ .bg-desktop,
+#sys-start:checked ~ .bg-desktop {
+  opacity: 1;
+}
+#sys-desktop:checked ~ .desktop-screen,
+#sys-start:checked ~ .desktop-screen {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* SHUT DOWN: a black layer covers everything */
+.power-off {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+}
+#sys-off:checked ~ .power-off {
+  display: flex;
+  animation: fade-in 0.6s ease-out;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   STEP 1: DESKTOP ICONS
+   ========================================================= */
+
+/* The shelf that holds all icons.
+   flex: 1                   -> take all the space above the taskbar
+   flex-direction: column    -> stack the icons downwards
+   flex-wrap: wrap           -> if the screen is too short, start a second column
+   align-content: flex-start -> keep the columns on the LEFT side */
+.desktop-icons {
+  flex: 1;
+  min-height: 0; /* lets the shelf shrink so extra icons wrap to a new column */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  padding: 12px 8px;
+}
+
+/* One icon = picture on top, name underneath */
+.desktop-icon {
+  width: 88px;
+  padding: 10px 4px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Hover: a soft see-through highlight, like Windows */
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* The SVG picture.
+   fill: none           -> draw only outlines, no colour inside
+   stroke-width         -> how thick the lines are
+   stroke-linecap/join  -> rounded line ends, so it looks friendly
+   (the line colour comes from the colour classes below) */
+.desktop-icon svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The name under the icon. text-shadow keeps it readable on any wallpaper */
+.desktop-icon span {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* One colour per icon. "stroke" is the colour of the SVG lines.
+   These work for the desktop icons, the taskbar AND the Start menu. */
+.icon-blue svg {
+  stroke: #4fc3f7;
+}
+.icon-yellow svg {
+  stroke: #ffd43b;
+}
+.icon-purple svg {
+  stroke: #a78bfa;
+}
+.icon-green svg {
+  stroke: #4ade80;
+}
+.icon-orange svg {
+  stroke: #fb923c;
+}
+.icon-pink svg {
+  stroke: #f472b6;
+}
+.icon-grey svg {
+  stroke: #cbd5e1;
+}
+.icon-teal svg {
+  stroke: #2dd4bf;
+}
+
+/* =========================================================
+   STEP 2: THE REUSABLE WINDOW
+   Every window is built from the SAME classes, so you never
+   write new CSS when you add a window. Just copy the HTML.
+   ========================================================= */
+
+/* --- The window box ---
+   position: absolute -> it floats on the desktop
+   display: none      -> hidden until it is opened
+   (each window's own position and size are set further down) */
+.window {
+  position: absolute;
+  left: 200px;
+  top: 60px;
+  width: 520px;
+  height: 340px;
+  display: none;
+  flex-direction: column;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  /* see-through dark glass: you can faintly see the wallpaper behind */
+  background: rgba(38, 36, 36, 0.62);
+  /* backdrop-filter blurs whatever is BEHIND the window (the glass effect) */
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  animation: window-pop 0.3s ease-out;
+}
+
+/* --- Where each window starts, and how big it is ---
+   To move a window, change its left / top numbers. */
+.win-about {
+  left: 230px;
+  top: 40px;
+  width: 480px;
+  height: 430px;
+}
+.win-projects {
+  left: 190px;
+  top: 40px;
+  width: 880px;
+  height: 560px;
+}
+.win-skills {
+  left: 260px;
+  top: 60px;
+  width: 520px;
+  height: 450px;
+}
+.win-resume {
+  left: 290px;
+  top: 30px;
+  width: 640px;
+  height: 520px;
+}
+.win-contact {
+  left: 320px;
+  top: 70px;
+  width: 480px;
+  height: 430px;
+}
+.win-notepad {
+  left: 350px;
+  top: 90px;
+  width: 560px;
+  height: 400px;
+}
+.win-settings {
+  left: 360px;
+  top: 130px;
+  width: 520px;
+  height: 360px;
+}
+.win-bin {
+  left: 390px;
+  top: 90px;
+  width: 480px;
+  height: 320px;
+}
+
+/* Each time a window opens it grows in a little, fades in,
+   and the glass blur "focuses" from 0 to 14px */
+@keyframes window-pop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* How a window opens, minimizes, maximizes and closes is decided by
+   its 4 radio buttons. Those rules are in the "WINDOW STATES" section
+   at the bottom of this file. */
+
+/* --- Title bar --- */
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  flex-shrink: 0;
+  padding-left: 14px;
+  /* no separate bar colour: the title bar is part of the same glass */
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.title-buttons {
+  display: flex;
+  height: 100%;
+}
+
+/* --- The 3 round-corner-free buttons: minimize, maximize, close --- */
+.win-btn {
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.btn-close:hover {
+  background: #e81123; /* the famous red */
+}
+
+/* Only ONE of "maximize" / "restore" is visible at a time */
+.btn-restore {
+  display: none;
+}
+
+/* --- Window content area --- */
+.window-body {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+.window-body h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.window-body p {
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* --- Title-bar button symbols, drawn with CSS ---
+   Each button is empty. ::before and ::after are two extra pieces
+   inside the button that we can draw lines and squares with.
+   Each button is 46px wide and 40px tall. "left" and "top" place a
+   piece inside it. */
+.win-btn {
+  position: relative;
+}
+.win-btn::before,
+.win-btn::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+}
+
+/* Minimize: one flat line */
+.btn-min::before {
+  left: 18px;
+  top: 20px;
+  width: 10px;
+  height: 1px;
+  background: #fff;
+}
+
+/* Maximize: one square */
+.btn-max::before {
+  left: 18px;
+  top: 15px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #fff;
+}
+
+/* Restore: two squares, one behind the other */
+.btn-restore::before {
+  left: 21px;
+  top: 14px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #fff;
+  border-left: none;
+  border-bottom: none;
+}
+.btn-restore::after {
+  left: 17px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #fff;
+}
+
+/* Close: two thin lines turned (rotated) to make an X */
+.btn-close::before,
+.btn-close::after {
+  left: 16px;
+  top: 20px;
+  width: 14px;
+  height: 1px;
+  background: #fff;
+}
+.btn-close::before {
+  transform: rotate(45deg);
+}
+.btn-close::after {
+  transform: rotate(-45deg);
+}
+
+/* =========================================================
+   STEP 4: START MENU
+   ========================================================= */
+
+/* --- Start button: two invisible click areas stacked on the logo --- */
+.start-button {
+  position: relative;
+}
+.start-hit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.close-hit {
+  display: none;
+}
+/* when the menu is open: show the "close" area, hide the "open" one,
+   and keep the button softly highlighted */
+#sys-start:checked ~ .desktop-screen .close-hit {
+  display: block;
+}
+#sys-start:checked ~ .desktop-screen .open-hit {
+  display: none;
+}
+#sys-start:checked ~ .desktop-screen .start-button {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Invisible full-screen layer behind the menu (click it = close menu) --- */
+.start-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  z-index: 15;
+  display: none;
+}
+#sys-start:checked ~ .desktop-screen .start-overlay {
+  display: block;
+}
+
+/* --- The menu box (same dark glass as the windows) --- */
+.start-menu {
+  position: absolute;
+  left: 8px;
+  bottom: 56px;
+  width: 480px;
+  z-index: 18;
+  display: none;
+  flex-direction: column;
+  padding: 22px 24px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(38, 36, 36, 0.78);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+#sys-start:checked ~ .desktop-screen .start-menu {
+  display: flex;
+  animation: menu-up 0.25s ease-out;
+}
+@keyframes menu-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Search bar at the top --- */
+.start-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+}
+.start-search svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #d0d0d0;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.start-search-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 13px;
+  user-select: text;
+}
+.start-search-input::placeholder {
+  color: #c4c4c4;
+}
+
+/* --- "Pinned" title and the grid of apps --- */
+.start-heading {
+  margin: 22px 0 8px 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.start-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  padding-bottom: 22px;
+}
+.start-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.start-app:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.start-app svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.start-app span {
+  font-size: 12px;
+  color: #fff;
+}
+
+/* --- Bottom bar: user + Lock + Shut down --- */
+.start-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -24px;
+  padding: 0 24px;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.start-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.start-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #0078d4;
+}
+.start-power {
+  display: flex;
+  gap: 8px;
+}
+.power-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.power-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.power-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =========================================================
+   WINDOW STATES
+   One block per window. Each block does 3 things:
+     1. shows the window when its "open" or "max" radio is ticked
+     2. stretches the window when "max" is ticked
+        (it sticks to the left, top and right edges and stops 48px
+         above the bottom, so the taskbar stays visible)
+     3. swaps the maximize button for the restore button
+   When "closed" or "min" is ticked, no rule shows the window, so it
+   stays hidden (display: none, set on .window).
+   How to read:  #about-open:checked ~ .desktop-screen .win-about
+   = "when the about-open radio is ticked, find the desktop that comes
+      after it, and inside it find the About Me window".
+   ========================================================= */
+
+/* ----- About Me window ----- */
+#about-open:checked ~ .desktop-screen .win-about,
+#about-max:checked ~ .desktop-screen .win-about {
+  display: flex;
+}
+#about-max:checked ~ .desktop-screen .win-about {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#about-max:checked ~ .desktop-screen .win-about .btn-max {
+  display: none;
+}
+#about-max:checked ~ .desktop-screen .win-about .btn-restore {
+  display: flex;
+}
+
+/* ----- Projects window ----- */
+#projects-open:checked ~ .desktop-screen .win-projects,
+#projects-max:checked ~ .desktop-screen .win-projects {
+  display: flex;
+}
+#projects-max:checked ~ .desktop-screen .win-projects {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#projects-max:checked ~ .desktop-screen .win-projects .btn-max {
+  display: none;
+}
+#projects-max:checked ~ .desktop-screen .win-projects .btn-restore {
+  display: flex;
+}
+
+/* ----- Skills window ----- */
+#skills-open:checked ~ .desktop-screen .win-skills,
+#skills-max:checked ~ .desktop-screen .win-skills {
+  display: flex;
+}
+#skills-max:checked ~ .desktop-screen .win-skills {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#skills-max:checked ~ .desktop-screen .win-skills .btn-max {
+  display: none;
+}
+#skills-max:checked ~ .desktop-screen .win-skills .btn-restore {
+  display: flex;
+}
+
+/* ----- Resume window ----- */
+#resume-open:checked ~ .desktop-screen .win-resume,
+#resume-max:checked ~ .desktop-screen .win-resume {
+  display: flex;
+}
+#resume-max:checked ~ .desktop-screen .win-resume {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#resume-max:checked ~ .desktop-screen .win-resume .btn-max {
+  display: none;
+}
+#resume-max:checked ~ .desktop-screen .win-resume .btn-restore {
+  display: flex;
+}
+
+/* ----- Contact window ----- */
+#contact-open:checked ~ .desktop-screen .win-contact,
+#contact-max:checked ~ .desktop-screen .win-contact {
+  display: flex;
+}
+#contact-max:checked ~ .desktop-screen .win-contact {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#contact-max:checked ~ .desktop-screen .win-contact .btn-max {
+  display: none;
+}
+#contact-max:checked ~ .desktop-screen .win-contact .btn-restore {
+  display: flex;
+}
+
+/* ----- Notepad window ----- */
+#notepad-open:checked ~ .desktop-screen .win-notepad,
+#notepad-max:checked ~ .desktop-screen .win-notepad {
+  display: flex;
+}
+#notepad-max:checked ~ .desktop-screen .win-notepad {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#notepad-max:checked ~ .desktop-screen .win-notepad .btn-max {
+  display: none;
+}
+#notepad-max:checked ~ .desktop-screen .win-notepad .btn-restore {
+  display: flex;
+}
+
+/* ----- Settings window ----- */
+#settings-open:checked ~ .desktop-screen .win-settings,
+#settings-max:checked ~ .desktop-screen .win-settings {
+  display: flex;
+}
+#settings-max:checked ~ .desktop-screen .win-settings {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#settings-max:checked ~ .desktop-screen .win-settings .btn-max {
+  display: none;
+}
+#settings-max:checked ~ .desktop-screen .win-settings .btn-restore {
+  display: flex;
+}
+
+/* ----- Recycle Bin window ----- */
+#bin-open:checked ~ .desktop-screen .win-bin,
+#bin-max:checked ~ .desktop-screen .win-bin {
+  display: flex;
+}
+#bin-max:checked ~ .desktop-screen .win-bin {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 48px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
+}
+#bin-max:checked ~ .desktop-screen .win-bin .btn-max {
+  display: none;
+}
+#bin-max:checked ~ .desktop-screen .win-bin .btn-restore {
+  display: flex;
+}
+
+/* =========================================================
+   STEP 5: PROJECTS FILE EXPLORER
+   ========================================================= */
+
+/* The area under the title bar. It fills the rest of the window. */
+.explorer {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Every "page" of the explorer (home + one per project).
+   Hidden by default. Only the one whose radio is ticked is shown. */
+.view {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+/* --- Top bar: Back button + path --- */
+.explorer-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.back-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* On the home page there is nowhere to go back to, so Back looks switched off */
+.back-off {
+  opacity: 0.35;
+  cursor: default;
+}
+.back-off:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.path {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+.chevron {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: #a8a8a8;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Home page: the folder icons --- */
+.folders {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  padding: 16px;
+  overflow: auto;
+}
+.folder {
+  width: 110px;
+  padding: 12px 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.folder:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.folder svg {
+  width: 56px;
+  height: 56px;
+}
+.folder-back {
+  fill: #e5a900;
+}
+.folder-front {
+  fill: #ffd43b;
+}
+.folder span {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* --- Project page: file list on the left, code viewer on the right --- */
+.project-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.file-list {
+  width: 210px;
+  flex-shrink: 0;
+  padding: 12px 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: auto;
+}
+.file-list-title {
+  margin: 0 0 8px 6px;
+  font-size: 12px;
+  color: #a8a8a8;
+}
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.file-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.file-name:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+/* the file you clicked stays highlighted (a clicked link keeps "focus") */
+.file-name:focus {
+  background: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+.file-name svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.file-html svg {
+  stroke: #fb923c;
+}
+.file-css svg {
+  stroke: #4fc3f7;
+}
+/* the small "Open" button: opens the real website in a new browser tab */
+.file-open {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgba(96, 205, 255, 0.18);
+  font-size: 11px;
+  color: #60cdff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.file-open:hover {
+  background: rgba(96, 205, 255, 0.3);
+}
+.file-open svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: #60cdff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* the code viewer */
+.project-body iframe {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: #1e1e1e;
+  color-scheme: dark;
+}
+
+/* Download buttons in the top bar */
+.bar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.bar-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.bar-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Which page is showing --- */
+#folder-home:checked ~ .view-home {
+  display: flex;
+}
+/* One rule per project: when its radio is ticked, show its page. */
+#folder-ai-management:checked ~ .view-ai-management {
+  display: flex;
+}
+#folder-apple:checked ~ .view-apple {
+  display: flex;
+}
+#folder-apple-site:checked ~ .view-apple-site {
+  display: flex;
+}
+#folder-bank-logos:checked ~ .view-bank-logos {
+  display: flex;
+}
+#folder-house-animation:checked ~ .view-house-animation {
+  display: flex;
+}
+#folder-logistics:checked ~ .view-logistics {
+  display: flex;
+}
+#folder-ludo-design:checked ~ .view-ludo-design {
+  display: flex;
+}
+#folder-man-walking:checked ~ .view-man-walking {
+  display: flex;
+}
+#folder-motion-project:checked ~ .view-motion-project {
+  display: flex;
+}
+#folder-movie-website:checked ~ .view-movie-website {
+  display: flex;
+}
+#folder-palmpay:checked ~ .view-palmpay {
+  display: flex;
+}
+#folder-printivo:checked ~ .view-printivo {
+  display: flex;
+}
+#folder-printivo-site:checked ~ .view-printivo-site {
+  display: flex;
+}
+#folder-she-leads-africa:checked ~ .view-she-leads-africa {
+  display: flex;
+}
+#folder-sla-practice:checked ~ .view-sla-practice {
+  display: flex;
+}
+#folder-sla-site:checked ~ .view-sla-site {
+  display: flex;
+}
+#folder-solar-system:checked ~ .view-solar-system {
+  display: flex;
+}
+#folder-digital-world:checked ~ .view-digital-world {
+  display: flex;
+}
+#folder-thoughtbot-blog-website:checked ~ .view-thoughtbot-blog-website {
+  display: flex;
+}
+#folder-tourism:checked ~ .view-tourism {
+  display: flex;
+}
+#folder-web-dev:checked ~ .view-web-dev {
+  display: flex;
+}
+#folder-project-22:checked ~ .view-project-22 {
+  display: flex;
+}
+#folder-project-23:checked ~ .view-project-23 {
+  display: flex;
+}
+#folder-project-24:checked ~ .view-project-24 {
+  display: flex;
+}
+#folder-project-25:checked ~ .view-project-25 {
+  display: flex;
+}
+#folder-project-26:checked ~ .view-project-26 {
+  display: flex;
+}
+#folder-project-27:checked ~ .view-project-27 {
+  display: flex;
+}
+#folder-project-28:checked ~ .view-project-28 {
+  display: flex;
+}
+#folder-project-29:checked ~ .view-project-29 {
+  display: flex;
+}
+#folder-project-30:checked ~ .view-project-30 {
+  display: flex;
+}
+/* To add one more project, copy the 3 lines above and change the name:
+   #folder-my-quiz:checked ~ .view-my-quiz { display: flex; } */
+
+/* =========================================================
+   STEP 6: THE APP WINDOWS
+   ========================================================= */
+
+/* ---------- ABOUT ME ---------- */
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 26px;
+}
+.about-avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #0078d4;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+.about .about-name {
+  margin: 16px 0 2px;
+  font-size: 24px;
+}
+.window-body .about-role {
+  margin-bottom: 14px;
+  color: #60cdff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.about .about-bio {
+  max-width: 360px;
+  margin-bottom: 16px;
+  color: #cbd5e1;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.about-tags span {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+}
+.about-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.status-label {
+  color: #a8a8a8;
+}
+
+/* ---------- SKILLS ---------- */
+.window-body .skills-intro {
+  margin-bottom: 18px;
+  color: #a8a8a8;
+  font-size: 13px;
+}
+.skill {
+  margin-bottom: 16px;
+}
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.skill-top span:last-child {
+  color: #a8a8a8;
+}
+/* the grey track behind the bar */
+.skill-track {
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+/* the coloured bar. Its width comes from style="width: 90%" in the HTML.
+   The animation makes it grow from 0 each time the window opens. */
+.skill-fill {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #60cdff, #818cf8);
+  animation: skill-grow 0.9s ease-out;
+}
+@keyframes skill-grow {
+  from {
+    width: 0;
+  }
+}
+
+/* ---------- RESUME ---------- */
+.resume-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.window-body .resume-name {
+  margin: 0;
+  font-size: 24px;
+}
+.window-body .resume-role {
+  margin: 2px 0 0;
+  color: #60cdff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.resume-download {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: #0078d4;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.resume-download:hover {
+  background: #1a8ae6;
+}
+.resume-download svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.resume-title {
+  margin: 20px 0 8px;
+  color: #a8a8a8;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.window-body .resume-text {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.resume-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.resume-item span {
+  color: #a8a8a8;
+}
+.resume-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.resume-tags span {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(96, 205, 255, 0.15);
+  color: #60cdff;
+  font-size: 12px;
+}
+.resume-link {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.resume-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- CONTACT ---------- */
+.window-body .contact-intro {
+  margin-bottom: 16px;
+  color: #a8a8a8;
+  font-size: 13px;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.contact-card svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #60cdff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.contact-text b {
+  font-size: 13px;
+}
+.contact-text span {
+  color: #a8a8a8;
+  font-size: 12px;
+}
+
+/* ---------- NOTEPAD ---------- */
+.notepad {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.notepad-text {
+  flex: 1;
+  min-height: 0;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: rgba(0, 0, 0, 0.18);
+  color: #fff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  user-select: text;
+}
+.notepad-text::placeholder {
+  color: #8a8a8a;
+}
+.notepad-status {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  padding: 6px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a8a8a8;
+  font-size: 11px;
+}
