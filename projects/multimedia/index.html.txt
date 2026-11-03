@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Leads Africa</title>
+  <title>Multimedia</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="box">
-    <h1>She Leads Africa</h1>
+    <h1>Multimedia</h1>
     <p>This is a placeholder page.</p>
-    <p>Put your real project files in the folder <b>projects/she-leads-africa/</b> and replace this index.html and style.css.</p>
+    <p>Put your real project files in the folder <b>projects/multimedia/</b> and replace this index.html and style.css.</p>
   </div>
 </body>
 </html>

@@ -43,13 +43,16 @@ body {
 }
 /* Lock Screen Background (Blurred Bloom effect) */
 .bg-lock {
+  /* background: radial-gradient(circle at center, #2d3856 0%, #0b0f19 100%); */
   background-image: url(images/Windows\ Lock\ Screen.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-
+/* Desktop Background (Clearer, lighter bloom) */
 .bg-desktop {
+  /* background: radial-gradient(circle at center, #3a4874 0%, #05070b 100%); */
+  background-image: url(images/Windows\ 12\ .jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -57,6 +60,7 @@ body {
   transition: opacity 0.8s ease-in-out;
 }
 
+/* --- LAYER 1: LOCK SCREEN CLOCK --- */
 .click-surface {
   position: absolute;
   top: 0;
@@ -95,6 +99,7 @@ body {
   margin-top: 12px;
 }
 
+/* --- LAYER 2: WINDOWS 11 SIGN-IN PANEL --- */
 .sign-in-screen {
   position: absolute;
   top: 0;
@@ -142,7 +147,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0px 3px #25a2f5;
   border-radius: 4px;
-  color: rgba(243, 243, 243, 0.432) 70b;
   outline: none;
 }
 
@@ -157,6 +161,17 @@ body {
   font-size: 20px;
 }
 
+/* CSS-only replacement for the old onfocus/onblur JavaScript:
+   when you click inside the box, the "Password" hint fades away.
+   When you click out and the box is empty, it fades back in. */
+.password-input::placeholder {
+  transition: color 0.2s;
+}
+.password-input:focus::placeholder {
+  color: transparent;
+}
+
+/* Arrow button styled as an HTML Label link */
 .submit-label-btn {
   cursor: pointer;
   position: relative;
@@ -190,6 +205,7 @@ body {
   color: #60cdff;
 }
 
+/* --- LAYER 3: WINDOWS 11 DESKTOP --- */
 .desktop-screen {
   position: absolute;
   top: 0;
@@ -208,6 +224,12 @@ body {
   justify-content: flex-end; /* Pushes taskbar to bottom */
 }
 
+/* =========================================================
+   STEP 3: WINDOWS 11 TASKBAR
+   ========================================================= */
+
+/* The bar itself. z-index keeps it ABOVE any window.
+   justify-content: space-between pushes the 3 zones apart. */
 .win11-taskbar {
   position: relative;
   z-index: 20;
@@ -222,6 +244,8 @@ body {
   padding: 0 8px;
 }
 
+/* Left and right zones both take equal space (flex: 1),
+   which keeps the middle zone perfectly centered. */
 .tb-left,
 .tb-right {
   flex: 1;
@@ -257,19 +281,12 @@ body {
   height: 9px;
   border-radius: 1px;
 }
-.logo-red {
-  background: #f25022;
-}
-.logo-green {
-  background: #7fba00;
-}
-.logo-blue {
-  background: #00a4ef;
-}
-.logo-yellow {
-  background: #ffb900;
-}
+.logo-red    { background: #f25022; }
+.logo-green  { background: #7fba00; }
+.logo-blue   { background: #00a4ef; }
+.logo-yellow { background: #ffb900; }
 
+/* --- Search box --- */
 .search-box {
   display: flex;
   align-items: center;
@@ -306,6 +323,7 @@ body {
   color: #c4c4c4;
 }
 
+/* --- Pinned apps in the middle --- */
 .tb-app {
   position: relative;
   width: 42px;
@@ -334,6 +352,7 @@ body {
   transform: scale(0.85);
 }
 
+/* The small bar under an icon. Hidden (width 0) until its window is open. */
 .tb-app::after {
   content: "";
   position: absolute;
@@ -343,9 +362,7 @@ body {
   height: 3px;
   border-radius: 3px;
   background: #60cdff;
-  transition:
-    width 0.2s,
-    left 0.2s;
+  transition: width 0.2s, left 0.2s;
 }
 
 /* OPEN or MAXIMIZED window -> long blue bar + soft highlight.
@@ -524,12 +541,8 @@ body {
   animation: fade-in 0.6s ease-out;
 }
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* =========================================================
@@ -596,30 +609,14 @@ body {
 
 /* One colour per icon. "stroke" is the colour of the SVG lines.
    These work for the desktop icons, the taskbar AND the Start menu. */
-.icon-blue svg {
-  stroke: #4fc3f7;
-}
-.icon-yellow svg {
-  stroke: #ffd43b;
-}
-.icon-purple svg {
-  stroke: #a78bfa;
-}
-.icon-green svg {
-  stroke: #4ade80;
-}
-.icon-orange svg {
-  stroke: #fb923c;
-}
-.icon-pink svg {
-  stroke: #f472b6;
-}
-.icon-grey svg {
-  stroke: #cbd5e1;
-}
-.icon-teal svg {
-  stroke: #2dd4bf;
-}
+.icon-blue svg   { stroke: #4fc3f7; }
+.icon-yellow svg { stroke: #ffd43b; }
+.icon-purple svg { stroke: #a78bfa; }
+.icon-green svg  { stroke: #4ade80; }
+.icon-orange svg { stroke: #fb923c; }
+.icon-pink svg   { stroke: #f472b6; }
+.icon-grey svg   { stroke: #cbd5e1; }
+.icon-teal svg   { stroke: #2dd4bf; }
 
 /* =========================================================
    STEP 2: THE REUSABLE WINDOW
@@ -653,54 +650,14 @@ body {
 
 /* --- Where each window starts, and how big it is ---
    To move a window, change its left / top numbers. */
-.win-about {
-  left: 230px;
-  top: 40px;
-  width: 480px;
-  height: 430px;
-}
-.win-projects {
-  left: 190px;
-  top: 40px;
-  width: 880px;
-  height: 560px;
-}
-.win-skills {
-  left: 260px;
-  top: 60px;
-  width: 520px;
-  height: 450px;
-}
-.win-resume {
-  left: 290px;
-  top: 30px;
-  width: 640px;
-  height: 520px;
-}
-.win-contact {
-  left: 320px;
-  top: 70px;
-  width: 480px;
-  height: 430px;
-}
-.win-notepad {
-  left: 350px;
-  top: 90px;
-  width: 560px;
-  height: 400px;
-}
-.win-settings {
-  left: 360px;
-  top: 130px;
-  width: 520px;
-  height: 360px;
-}
-.win-bin {
-  left: 390px;
-  top: 90px;
-  width: 480px;
-  height: 320px;
-}
+.win-about { left: 230px; top: 40px; width: 480px; height: 430px; }
+.win-projects { left: 190px; top: 40px; width: 880px; height: 560px; }
+.win-skills { left: 260px; top: 60px; width: 520px; height: 450px; }
+.win-resume { left: 290px; top: 30px; width: 640px; height: 520px; }
+.win-contact { left: 320px; top: 70px; width: 480px; height: 430px; }
+.win-notepad { left: 350px; top: 90px; width: 560px; height: 400px; }
+.win-settings { left: 360px; top: 100px; width: 520px; height: 440px; }
+.win-bin { left: 390px; top: 90px; width: 480px; height: 320px; }
 
 /* Each time a window opens it grows in a little, fades in,
    and the glass blur "focuses" from 0 to 14px */
@@ -714,7 +671,7 @@ body {
     transform: scale(1);
     opacity: 1;
     backdrop-filter: blur(14px);
-  }
+    }
 }
 
 /* How a window opens, minimizes, maximizes and closes is decided by
@@ -912,14 +869,8 @@ body {
   animation: menu-up 0.25s ease-out;
 }
 @keyframes menu-up {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 
 /* --- Search bar at the top --- */
@@ -1488,32 +1439,38 @@ body {
 }
 
 /* --- Which page is showing --- */
+/* One rule per project: when its radio is ticked, show its page. */
 #folder-home:checked ~ .view-home {
   display: flex;
 }
-/* One rule per project: when its radio is ticked, show its page. */
-#folder-ai-management:checked ~ .view-ai-management {
+#folder-a-static-website:checked ~ .view-a-static-website {
   display: flex;
 }
-#folder-apple:checked ~ .view-apple {
+#folder-ai-management:checked ~ .view-ai-management {
   display: flex;
 }
 #folder-apple-site:checked ~ .view-apple-site {
   display: flex;
 }
+#folder-ayobami-tech-blog-html:checked ~ .view-ayobami-tech-blog-html {
+  display: flex;
+}
 #folder-bank-logos:checked ~ .view-bank-logos {
   display: flex;
 }
-#folder-house-animation:checked ~ .view-house-animation {
+#folder-instagram-page:checked ~ .view-instagram-page {
+  display: flex;
+}
+#folder-intro-assignment:checked ~ .view-intro-assignment {
   display: flex;
 }
 #folder-logistics:checked ~ .view-logistics {
   display: flex;
 }
-#folder-ludo-design:checked ~ .view-ludo-design {
+#folder-ludo-board:checked ~ .view-ludo-board {
   display: flex;
 }
-#folder-man-walking:checked ~ .view-man-walking {
+#folder-ludo-design:checked ~ .view-ludo-design {
   display: flex;
 }
 #folder-motion-project:checked ~ .view-motion-project {
@@ -1522,28 +1479,19 @@ body {
 #folder-movie-website:checked ~ .view-movie-website {
   display: flex;
 }
+#folder-multimedia:checked ~ .view-multimedia {
+  display: flex;
+}
 #folder-palmpay:checked ~ .view-palmpay {
   display: flex;
 }
-#folder-printivo:checked ~ .view-printivo {
-  display: flex;
-}
 #folder-printivo-site:checked ~ .view-printivo-site {
-  display: flex;
-}
-#folder-she-leads-africa:checked ~ .view-she-leads-africa {
-  display: flex;
-}
-#folder-sla-practice:checked ~ .view-sla-practice {
   display: flex;
 }
 #folder-sla-site:checked ~ .view-sla-site {
   display: flex;
 }
 #folder-solar-system:checked ~ .view-solar-system {
-  display: flex;
-}
-#folder-digital-world:checked ~ .view-digital-world {
   display: flex;
 }
 #folder-thoughtbot-blog-website:checked ~ .view-thoughtbot-blog-website {
@@ -1553,6 +1501,9 @@ body {
   display: flex;
 }
 #folder-web-dev:checked ~ .view-web-dev {
+  display: flex;
+}
+#folder-project-21:checked ~ .view-project-21 {
   display: flex;
 }
 #folder-project-22:checked ~ .view-project-22 {
@@ -1689,9 +1640,7 @@ body {
   animation: skill-grow 0.9s ease-out;
 }
 @keyframes skill-grow {
-  from {
-    width: 0;
-  }
+  from { width: 0; }
 }
 
 /* ---------- RESUME ---------- */
@@ -1867,4 +1816,257 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #a8a8a8;
   font-size: 11px;
+}
+
+/* =========================================================
+   STEP 7: SETTINGS, ANIMATIONS, HOVER EFFECTS, SMALL SCREENS
+   ========================================================= */
+
+/* ---------- SETTINGS WINDOW ---------- */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.settings-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.settings-text span {
+  font-size: 12px;
+  color: #a8a8a8;
+}
+
+/* The switch: a pill (.switch) with a round knob inside it */
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 22px;
+  border-radius: 22px;
+  background: #5a5a5a;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+/* When #anim-on is ticked: blue pill, knob slides right */
+#anim-on:checked ~ .desktop-screen .switch {
+  background: #0078d4;
+}
+#anim-on:checked ~ .desktop-screen .switch-knob {
+  transform: translateX(22px);
+}
+
+.settings-card {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.settings-card-title {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.settings-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.settings-line span:first-child {
+  color: #a8a8a8;
+}
+
+/* ---------- HOVER EFFECTS ---------- */
+.desktop-icon {
+  transition: background 0.2s, transform 0.2s;
+}
+.desktop-icon:hover {
+  transform: translateY(-3px);
+}
+.tb-app {
+  transition: background 0.15s, transform 0.15s;
+}
+.tb-app:hover {
+  transform: translateY(-2px);
+}
+.start-app:hover {
+  transform: scale(1.06);
+}
+.start-app {
+  transition: background 0.15s, transform 0.15s;
+}
+.folder {
+  transition: background 0.15s, transform 0.15s;
+}
+.folder:hover {
+  transform: translateY(-3px);
+}
+.contact-card:hover {
+  transform: translateX(4px);
+}
+.contact-card {
+  transition: background 0.15s, transform 0.15s;
+}
+.resume-download:hover,
+.resume-link:hover {
+  transform: translateY(-1px);
+}
+.power-btn:hover {
+  transform: scale(1.08);
+}
+.start-button:hover {
+  transform: scale(1.08);
+}
+
+/* ---------- OPEN ANIMATIONS ---------- */
+/* Each explorer page fades in when you open a folder */
+.view {
+  animation: fade-in 0.25s ease-out;
+}
+/* The settings window card slides up a little */
+.settings-row,
+.settings-card {
+  animation: menu-up 0.35s ease-out;
+}
+
+/* ---------- ANIMATIONS SWITCHED OFF ----------
+   "#anim-on:not(:checked)" = the Animations switch is OFF.
+   The star "*" means "every box inside the desktop". */
+#anim-on:not(:checked) ~ .desktop-screen *,
+#anim-on:not(:checked) ~ .desktop-screen *::before,
+#anim-on:not(:checked) ~ .desktop-screen *::after {
+  animation: none;
+  transition: none;
+}
+
+/* ---------- SMALLER SCREENS ---------- */
+
+/* Tablets and small laptops: every window fills the screen above the taskbar */
+@media (max-width: 1100px) {
+  .window {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 48px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+/* Short screens (like a laptop with a small window) do the same */
+@media (max-height: 640px) {
+  .window {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 48px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+/* Phones */
+@media (max-width: 700px) {
+  .win11-time {
+    font-size: 5.5rem;
+  }
+  .lock-screen-content {
+    padding-top: 120px;
+  }
+  .win11-date {
+    font-size: 1.1rem;
+  }
+  .user-avatar {
+    width: 140px;
+    height: 140px;
+  }
+  .password-box {
+    width: 260px;
+  }
+
+  /* taskbar: keep Start + apps, hide the search box and the extra tray icons */
+  .search-box,
+  .tray-group,
+  .tray-bell {
+    display: none;
+  }
+  .tb-app {
+    width: 34px;
+  }
+  .tb-app::after {
+    left: 17px;
+  }
+  .tb-center {
+    gap: 0;
+  }
+  .tray-clock {
+    padding: 0 4px;
+    font-size: 10px;
+  }
+
+  /* start menu fits the screen */
+  .start-menu {
+    left: 6px;
+    right: 6px;
+    width: auto;
+    padding: 16px 14px 0;
+  }
+  .start-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  /* explorer: file list on top, code viewer below */
+  .project-body {
+    flex-direction: column;
+  }
+  .file-list {
+    width: auto;
+    max-height: 40%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .folder {
+    width: 90px;
+  }
+  .desktop-icon {
+    width: 76px;
+  }
+
+  /* hide the maximize button (windows are already full size) */
+  .btn-max,
+  .btn-restore {
+    display: none;
+  }
+  #about-max:checked ~ .desktop-screen .win-about .btn-restore,
+  #projects-max:checked ~ .desktop-screen .win-projects .btn-restore,
+  #skills-max:checked ~ .desktop-screen .win-skills .btn-restore,
+  #resume-max:checked ~ .desktop-screen .win-resume .btn-restore,
+  #contact-max:checked ~ .desktop-screen .win-contact .btn-restore,
+  #notepad-max:checked ~ .desktop-screen .win-notepad .btn-restore,
+  #settings-max:checked ~ .desktop-screen .win-settings .btn-restore,
+  #bin-max:checked ~ .desktop-screen .win-bin .btn-restore {
+    display: none;
+  }
 }
